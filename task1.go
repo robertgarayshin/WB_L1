@@ -13,7 +13,7 @@ type Human struct {
 }
 
 // Human's method
-func (h Human) sayHi() {
+func (h *Human) sayHi() {
 	fmt.Printf("Hi! My name is %s", h.Name)
 }
 

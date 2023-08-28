@@ -18,6 +18,7 @@ func task5() {
 		return
 	}
 
+	// Записываем данные в канал
 	go func() {
 		for {
 			now := time.Now().Unix()
@@ -27,12 +28,13 @@ func task5() {
 		}
 	}()
 
+	// В другой горутине читаем данные из канала
 	go func() {
 		for {
 			fmt.Printf("Received %d\n", <-ch)
-			time.Sleep(1 * time.Second)
 		}
 	}()
 
+	// Останавливаем горутину Main для работы других
 	time.Sleep(time.Duration(n) * time.Second)
 }

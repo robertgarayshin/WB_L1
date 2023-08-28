@@ -5,12 +5,16 @@ import (
 	"time"
 )
 
+// Реализовать собственную функцию sleep.
 func sleep(d time.Duration) time.Time {
+	// time.After() возвращает в канал текущее время по истечении промежутка в параметре.
 	return <-time.After(d)
 }
 
 func sleep2(d time.Duration) time.Time {
 	ticker := time.Tick(d)
+	// Функция-тикер вернет канал с доставкой пакетов по истечении указанного времени (хотя вообще она будет "тикать"
+	// каждый определенный промежуток времени). В нашем случае первый "возврат" тикера завершит функцию sleep2
 	for done := range ticker {
 		return done
 	}

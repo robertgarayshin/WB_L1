@@ -9,12 +9,12 @@ import (
 func writer(ch chan int, a [10]int) {
 	defer close(ch)
 	for i := range a {
-		ch <- a[i]
+		ch <- a[i] // записываем числа из массива
 	}
 }
 
 func multiplier(x int, ch2 chan int) {
-	ch2 <- x * 2
+	ch2 <- x * 2 // записываем в другой канал результат умножения числа на 2
 }
 
 func task9() {
@@ -26,11 +26,11 @@ func task9() {
 	ch2 := make(chan int)
 	go writer(ch, a)
 	for {
-		x, ok := <-ch
+		x, ok := <-ch // получаем данные из канала
 		if !ok {
-			break
+			break // если канал закрыт - останавливаем выполнение
 		} else {
-			go multiplier(x, ch2)
+			go multiplier(x, ch2) // если все ок - умножаем и выводим числа
 			fmt.Println(<-ch2)
 		}
 	}

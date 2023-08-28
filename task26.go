@@ -5,16 +5,19 @@ import (
 	"strings"
 )
 
+// Разработать программу, которая проверяет, что все символы в строке уникальные
+// (true — если уникальные, false etc). Функция проверки должна быть регистронезависимой.
+
 func check(s string) bool {
-	s = strings.ToLower(s)
-	set := make(map[rune]interface{})
+	s = strings.ToLower(s)            // обеспечиваем регистронезависимость
+	set := make(map[rune]interface{}) // создаем множество символов строки
 	for i := 0; i < len(s); i++ {
 		set[rune(s[i])] = ""
+	} // заполняем ключи карты согласно символам в строке
+	if len(set) < len(s) { // проверяем совпадение длин множества и строки
+		return false // если длина строки меньше - есть повторы
 	}
-	if len(set) < len(s) {
-		return false
-	}
-	return true
+	return true // иначе повторов нет
 }
 
 func task26() {
